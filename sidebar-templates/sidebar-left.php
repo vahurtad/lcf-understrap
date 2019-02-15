@@ -16,7 +16,7 @@ if ( ! is_active_sidebar( 'left-sidebar' ) ) {
 // when both sidebars turned on reduce col size to 3 from 4.
 $sidebar_pos = get_theme_mod( 'understrap_sidebar_position' );
 ?>
-<!-- lmao -->
+
 <?php if ( 'both' === $sidebar_pos ) : ?>
 	<div class="col-md-3 widget-area" id="left-sidebar" role="complementary">
 <?php else : ?>

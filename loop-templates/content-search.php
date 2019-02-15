@@ -1,7 +1,7 @@
 <?php
 /**
  * Search results partial template.
- * EDIT : VANESSA HURTADO
+ *
  * @package understrap
  */
 
@@ -21,32 +21,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 		);
 		?>
 
+		<?php if ( 'post' == get_post_type() ) : ?>
 
+			<div class="entry-meta">
+
+				<?php understrap_posted_on(); ?>
+
+			</div><!-- .entry-meta -->
+
+		<?php endif; ?>
 
 	</header><!-- .entry-header -->
 
 	<div class="entry-summary">
-    <?php 
-    // https://wordpress.stackexchange.com/questions/16070/how-to-highlight-search-terms-without-plugin
-    $title = get_the_title();
-    $keys = implode('|', explode(' ', get_search_query()));
-    $title = preg_replace('/(' . $keys .')/iu', '<strong class="search-highlight">\0</strong>', $title);
 
-    echo $title;
-
-    $content = get_the_content();
-    $keys = implode('|', explode(' ', get_search_query()));
-    $content = preg_replace('/(' . $keys .')/iu', '<strong class="search-highlight">\0</strong>', $content);
-
-    echo '<p>' . $content . '</p>';
-
-  
-    ?>
-
-   
+		<?php the_excerpt(); ?>
 
 	</div><!-- .entry-summary -->
 
+	<footer class="entry-footer">
 
+		<?php understrap_entry_footer(); ?>
+
+	</footer><!-- .entry-footer -->
 
 </article><!-- #post-## -->
