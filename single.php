@@ -1,9 +1,12 @@
 <?php
 /**
  * The template for displaying all single posts.
- *
+ * EDIT : VANESSA HURTADO
+ * 
  * @package understrap
  */
+
+global $wp_query;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -11,7 +14,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 $container = get_theme_mod( 'understrap_container_type' );
+$id           = $wp_query->post->ID;
+$page_content = get_post($id);
+$page_content = apply_filters('the_content', $post->post_content);
+$the_theme    = wp_get_theme();
+get_header();
+
+if ((have_posts())) {
+    while ((have_posts())) {
+        the_post();
+        if (has_post_thumbnail($post->ID)) {
+            $featured_image = get_the_post_thumbnail_url(get_the_id(), 'full');
+        }
+    }
+}
 ?>
+
+<div class="jumbotron" style="background: url(<?php echo $featured_image; ?>) center no-repeat; background-size: cover;"></div>
 
 <div class="wrapper" id="single-wrapper">
 
@@ -19,30 +38,20 @@ $container = get_theme_mod( 'understrap_container_type' );
 
 		<div class="row">
 
-			<!-- Do the left sidebar check -->
-			<?php get_template_part( 'global-templates/left-sidebar-check' ); ?>
-
 			<main class="site-main" id="main">
 
-				<?php while ( have_posts() ) : the_post(); ?>
-
-					<?php get_template_part( 'loop-templates/content', 'single' ); ?>
-
-					<?php understrap_post_nav(); ?>
-
-					<?php
-					// If comments are open or we have at least one comment, load up the comment template.
-					if ( comments_open() || get_comments_number() ) :
-						comments_template();
-					endif;
-					?>
-
-				<?php endwhile; // end of the loop. ?>
-
+        <div class="row">
+          <div id="sidebar" class="col-sm-5">
+            <? the_title('<h5>', '</h5>'); ?>
+          </div>
+          <div class="col-sm-7">
+            <div class="entry-content">
+              <?php echo $page_content;  ?>
+            </div>
+          </div>
+        </div>
 			</main><!-- #main -->
 
-			<!-- Do the right sidebar check -->
-			<?php get_template_part( 'global-templates/right-sidebar-check' ); ?>
 
 		</div><!-- .row -->
 
@@ -50,4 +59,4 @@ $container = get_theme_mod( 'understrap_container_type' );
 
 </div><!-- #single-wrapper -->
 
-<?php get_footer(); ?>
+<?php get_template_part( 'page-templates/footer-page' ); ?>
