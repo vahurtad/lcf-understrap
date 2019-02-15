@@ -1,7 +1,7 @@
 <?php
 /**
  * The template for displaying 404 pages (not found).
- * EDIT : VANESSA HURTADO
+ * EDIT : VANESSA HURTADO 
  * @package understrap
  */
 
