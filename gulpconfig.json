@@ -1,6 +1,6 @@
 {
   "browserSyncOptions" : {
-    "proxy": "http://lcf.local/",
+    "proxy": "localhost/",
     "notify": false
   },
   "browserSyncWatchFiles" : [
